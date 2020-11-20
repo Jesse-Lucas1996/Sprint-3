@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<style>
+ html {
+  color:white;
+}
+
+h1 {
+  font-family: verdana;
+  color: white;
+  text-align: center;
+}
+
+h2 {
+  font-family: verdana;
+  color: black;
+  text-align: left;
+}
+
+h3 {
+  font-family: verdana;
+  color: black;
+  text-align: left;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #add8e6;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+  font-family: verdana;
+  color: black;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: #4169E1;
+  color: white;
+}
+</style>
+
+<head>
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<title>ACME SPRINT ONE</title>
+
+<body>
+  <h1>Home Page</h1>
+<div class="topnav" id="myTopnav">
+  
+    <a href="http://localhost/Project/index.html">Home</a>
+    <a href="http://localhost/Project/Display.php">Show Movies</a>
+    <a href="http://localhost/Project/search.php">Search</a>
+    <a href="http://localhost/Project/member.php">Members</a>
+    <a href="http://localhost/Project/displayAllMembers.php">Display Members</a>
+	<a href="http://localhost/Project/Graph.html">Graph</a>  	
+<i class ="fa fa-bars"></i>
+   
+  </div>
+
+  <h2>Welcome to ACME MOVIE DATABASE APPLICATION</h2>
+  <h3>This website has the functionality to access a database and show all the data inside. You can also search through
+    the database
+    and see a chart which shows the 10 most searched for items in the database.
+  </h3>
+  <h4>
+    <form action = "http://localhost/Project/deletingMember.php">
+      <input type = "submit" style = "background:transparent; border:none; color:transparent;">
+    </form>
+  </h4>
+</body>
+</html>
