@@ -50,22 +50,22 @@ th {
 
 <head>
     <title>Search Page</title>
-    <h1>Display Members</h1>
+    <h1>Display Admins</h1>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
    <meta name="viewport" content="width=device-width = 100%">
    <link rel="stylesheet" href="stylesheet.css">
 
     <div class="topnav" id="myTopnav">
-    <a href="http://localhost/Project/index.html">Home</a>
-    <a href="http://localhost/Project/Display.php">Show Movies</a>
-    <a href="http://localhost/Project/Search.php">Search</a>
-    <a href="http://localhost/Project/member.php">Members</a>
-    <a href="http://localhost/Project/displayAllMembers.php">Display Members</a>
-    <a href="http://localhost/Project/Graph.html">Graph</a>
-  	
+    <a href="http://localhost/AdminLogin/index.html">Home</a> 
+<a href="http://localhost/AdminLogin/register.php">Admin Register</a>  	
+    <a href="http://localhost/AdminLogin/login.php">Admin Login</a> 
+    <a href="logout.php">Sign Out of Your Account</a>	
     <i class="fa fa-bars"></i>
+    <meta http-equiv="refresh" content="20">
     </a>
   </div>
+
 </head>
 	 
 
@@ -75,7 +75,7 @@ th {
 
 echo "<table style='border: solid 2px black;'>";
 echo '<table class="table-striped table-bordered table-responsive table">';
-echo "<tr><th>Name</th><th>Email</th><th>Monthly Newsletter</th><th>Breaking Newsletter</th><th>";
+echo "<tr><th>Rating of the movie</th><th>Title</th></tr>";
 class TableRows extends RecursiveIteratorIterator {
  
 
@@ -96,17 +96,19 @@ class TableRows extends RecursiveIteratorIterator {
 	}
 	
 } 
+
+
 $username = 'root';
 $password = '';
 try 
 {
 $conn = new PDO('mysql:host=localhost;dbname=movie', $username, $password); 
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$stmt = $conn->prepare('SELECT * FROM `members` WHERE 1');
+$stmt = $conn->prepare('SELECT `Star Rating`, Title FROM movies ORDER BY `Star Rating` DESC LIMIT 10');
 $stmt->execute();
     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchall())) as $k=>$v) {
-        echo $v;
+    foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchall())) as $k) {
+        echo $k;
 }
 }
 
@@ -115,13 +117,28 @@ catch(PDOException $e)
   echo 'ERROR: ' . $e->getMessage();
 }
 $conn = null;
-header("Refresh: 5;");
+if(isset($_POST['submit']))
+{
+  $username = 'root';
+  $password = '';
+  $usernames = $_POST['username'];
+  try 
+  {
+  $conn = new PDO('mysql:host=localhost;dbname=movie', $username, $password); 
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $stmt = $conn->prepare("SELECT `Star Rating`, Title FROM movies ORDER BY `Star Rating` DESC LIMIT 10");
+  $stmt->execute();
+}
+catch(PDOException $e) 
+{
+  echo 'ERROR: ' . $e->getMessage();
+}
+}
 
 ?>
 
       </main>
-    </div> 
+    </div>
 
 </body>
-
 </html>

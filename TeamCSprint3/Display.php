@@ -60,8 +60,8 @@ th {
     <a href="http://localhost/Project/Display.php">Show Movies</a>
     <a href="http://localhost/Project/Search.php">Search</a>
     <a href="http://localhost/Project/member.php">Members</a>
-    <a href="http://localhost/Project/displayAllMembers.php">Display Members</a>
     <a href="http://localhost/Project/Graph.html">Graph</a>
+	<a href="http://localhost/Project/rating.php">Rate a Movie</a>  
   	
     <i class="fa fa-bars"></i>
     </a>
@@ -75,7 +75,7 @@ th {
 
 echo "<table style='border: solid 2px black;'>";
 echo '<table class="table-striped table-bordered table-responsive table">';
-echo "<tr><th>ID</th><th>Title</th><th>Studio</th><th>Status</th><th>Sound</th><th>Versions</th><th>RecRetPrice</th><th>Rating</th><th>Year</th><th>Genre</th><th>Aspect</th><th>Frequency</th></tr>";
+echo "<tr><th>ID</th><th>Title</th><th>Studio</th><th>Status</th><th>Sound</th><th>Versions</th><th>RecRetPrice</th><th>Rating</th><th>Year</th><th>Genre</th><th>Aspect</th></tr>";
 class TableRows extends RecursiveIteratorIterator {
  
 
@@ -100,9 +100,9 @@ $username = 'root';
 $password = '';
 try 
 {
-$conn = new PDO('mysql:host=localhost;dbname=moviesdb', $username, $password); 
+$conn = new PDO('mysql:host=localhost;dbname=movie', $username, $password); 
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$stmt = $conn->prepare('SELECT * FROM `movies` WHERE 1');
+$stmt = $conn->prepare('SELECT `ID`, `Title`, `Studio`, `Status`, `Sound`, `Versions`, `RecRetPrice`, `Rating`, `Year`, `Genre`, `Aspect` FROM `movies` WHERE 1');
 $stmt->execute();
     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
     foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchall())) as $k=>$v) {
@@ -115,7 +115,6 @@ catch(PDOException $e)
   echo 'ERROR: ' . $e->getMessage();
 }
 $conn = null;
-
 
 
 ?>

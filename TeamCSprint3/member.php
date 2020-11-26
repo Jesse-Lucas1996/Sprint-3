@@ -100,7 +100,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
+  // if (empty($_POST["monthlyEmail"])) {
+  //   $monthlyEmailErr = "Error";
+  // } else {
+  //   $monthlyEmail = ($_POST["monthlyEmail"]);
+  //   // check if e-mail address is well-formed
+  //   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  //     $monthlyEmailErr = "Invalid";
+  //   }
+  // }
 
+  // if (empty($_POST["newsFlash"])) {
+  //   $newsFlashErr = "Error";
+  // } else {
+  //   $newsFlash = ($_POST["newsFlash"]);
+  //   // check if e-mail address is well-formed
+  //   if (!filter_var($newsFlash, FILTER_VALIDATE_EMAIL)) {
+  //     $newsFlashErr = "Invalid";
+  //   }
+  //}
+    
     if(isset($_POST["newsFlash"])) { 
         $newsFlash = "True"; 
     } 
@@ -145,18 +164,35 @@ function test_input($data) {
 
 <?php
 echo "<h2>Your Input:</h2>";
-echo "You are now a member ";
-
+echo $name;
+echo "<br>";
+echo $email;
+echo "<br>";
+echo $monthlyEmail;
+echo "<br>";
+echo $newsFlash;
+echo "<br>";
 
 $username = 'root';
 $password = '';
 
 
+// if (isset($_POST['monthlyEmail'])) {
+//   $monthlyEmail = "True";
+// } else {
+//   $monthlyEmail = "False";
+// }
+
+// if (isset($_POST['newsFlash'])) {
+//   $newsFlash = "True";
+// } else {
+//   $newsFlash = "False";
+// }
 
 
 try 
 {
-  $conn = new PDO('mysql:host=localhost;dbname=movies', $username, $password); 
+  $conn = new PDO('mysql:host=localhost;dbname=moviesdb', $username, $password); 
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $stmt = $conn->prepare('INSERT INTO members(Name, Email, MonthlyNewsletter, BreakingNewsletter) VALUES(:Name, :Email, :MonthlyNewsletter, :BreakingNewsletter)');
   $stmt->bindParam(':Name', $name);

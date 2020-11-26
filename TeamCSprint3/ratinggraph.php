@@ -4,7 +4,7 @@ $dbname = "movie";
 $username = "root";
 $password = "";
 
-$sql = "SELECT `Frequency`, `Title` FROM `movies` ORDER BY `Frequency` DESC LIMIT 10";
+$sql = "SELECT `Star Rating`, Title FROM movies ORDER BY `Star Rating` DESC LIMIT 10";
 $conn = new PDO("mysql:host=$localhost; dbname=$dbname", $username, $password);
 
 try {
@@ -23,7 +23,7 @@ $data = array();
 
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) 
 {
-  $data[$row['Title']] = $row['Frequency'];
+  $data[$row['Title']] = $row['Star Rating'];
 }
 
 // Image dimensions
@@ -50,10 +50,10 @@ $fontSize = 10;
 $labelMargin = 8;
 
 // Max value on y-axis
-$yMaxValue = 50;
+$yMaxValue = 5;
 
 // Distance between grid lines on y-axis
-$yLabelSpan = 5;
+$yLabelSpan = 1;
 
 // Init image
 $chart = imagecreate($imageWidth, $imageHeight);

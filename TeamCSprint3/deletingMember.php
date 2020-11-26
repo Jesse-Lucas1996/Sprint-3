@@ -70,7 +70,7 @@ th {
 <?php
 // define variables and set to empty values
 $nameErr = $emailErr = "";
-$email = "";
+$name = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["name"])) {
@@ -105,24 +105,24 @@ function test_input($data) {
 
 <h2>Delete User</h2>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-  Email: <input type="text" name="email" value="<?php echo $email;?>">
+  Name: <input type="text" name="name" value="<?php echo $name;?>">
   <br><br>
   <input type="submit" name="delete" value="Delete">  
 </form>
 
 <?php
 echo "<h2>Your Input:</h2>";
-echo $email;
+echo $name;
 
 
 $username = 'root';
 $password = '';
 try 
 {
-  $conn = new PDO('mysql:host=localhost;dbname=movies', $username, $password); 
+  $conn = new PDO('mysql:host=localhost;dbname=moviesdb', $username, $password); 
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $stmt = $conn->prepare('DELETE FROM `members` WHERE Email = :Email');
-  $stmt->bindParam(':Email', $email, PDO::PARAM_STR);
+  $stmt = $conn->prepare('DELETE FROM `members` WHERE Name = :Name');
+  $stmt->bindParam(':Name', $name, PDO::PARAM_STR);
   
   $stmt->execute();
 
